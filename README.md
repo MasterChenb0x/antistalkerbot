@@ -12,8 +12,13 @@ Moved a lot of snippets around this session. Worked on a menu system so input is
 
 Taking in username argument seems to work, but there is no output with user ID as an argument. Tried str and int formatting for ID, but no dice. Will troubleshoot this soon. The rest of my sandbox is in the giant multiline comment towards the end of the script. That will disappear as I move snippets around.
 
+###### 06/30/2018
+Resolved menu selection issue.
+Moved code into proper place depending on flag selectiom.
+Resolved Twitter ID option issue, but it broke again when moving code.
+
 _TO-DO_
 1. ~~Build menu into program.~~
 2. Report default settings of suspect accounts.
 3. Resolve Twitter IDs to usernames for human readability.
-4. Fix User ID query.
+4. Fix User ID query.... was fixed and broke again. Will review.

@@ -13,7 +13,7 @@ from twython import Twython
 apiKey = 'YOUR_API_KEY'
 apiSecret = 'YOUR_API_SECRET'
 accessToken = 'YOUR_ACCESS_TOKEN'
-accessTokenSecret = 'YOUR_ACCESS_TOKEN_SECRET'
+accessTokenSecret = 'ACCESS_TOKEN_SECRET'
 
 api = Twython(apiKey,apiSecret,accessToken,accessTokenSecret)
 #--
@@ -71,7 +71,7 @@ def start(argv):
 		usage()
 		sys.exit()
 	try:
-		opts, args = getopt.getopt(argv, "u:i")
+		opts, args = getopt.getopt(argv, "u:i:")
 	except getopt.GetoptError:
 		usage()
 		sys.exit()
@@ -86,14 +86,50 @@ def start(argv):
 	for opt, arg in opts:
 		if opt == '-u':
 			twitName = str(arg)
+			print(twitName)
 		elif opt == '-i':
-			twitID = int(arg)			
+			twitID = str(arg)			
+			print(twitID)
 	if twitName != "":
 		result = getUserInfobyName(twitName)
-		print(result)
-	elif twitID != "":
+		followers = getFollowersbyName(twitName)
+		followerArray = followers['ids']
+		# Write followers to file for later analysis.
+		for fa in followerArray:
+			flist.write(str(fa) + "\n")
+		# Build suspect list
+		for i in followerArray:
+			print("Retrieving " + str(i) + "\'s followers")
+			try:
+				followerDictObj = getFollowersbyID(i)
+				suspectArray = followerDictObj['ids']
+				for sa in suspectArray:
+					slist.write(str(sa) + "\n")
+			except:
+				slist.write(str(i) + " may be a protected account. \n")
+				pass
+			time.sleep(20) # should avoid rate limit
+	if twitID != "":
 		result = getUserInfobyID(twitID)
-		print(result)
+		print result
+		followers = getFollowersbyID(twitID)
+		followerArray = followers['ids']
+		# Write followers to file for later analysis
+		for fa in followerArray:
+			flist.write(str(fa) + "\n")
+		# Build suspect list
+		for i in followerArray:
+			print("Retrieving " + stri(i) + "\'s followers")
+			try:
+				followerDictObj = getFollowersbyID(i)
+				suspectArray = followerDictObj['ids']
+				for sa in suspectArray:
+					slist.write(str(sa) + "\n")
+			except:
+				slist.write(str(i) + " may be a protected account. \n")
+				pass
+			time.sleep(20)  # should avoid rate limit 
+
 	flist.close()
 	slist.close()
 	sys.exit()
@@ -102,35 +138,8 @@ def start(argv):
 
 '''
 #-- Still using the below area for testing until I can put it all together.
-result = getUserInfobyID(00000000)
-sName = result['screen_name']
-print sName
 
 
-followers = getFollowersbyName('target')
-followerArray = followers['ids']
-print followerArray
-
-# Write followers to file for later analysis.
-for fa in followerArray:
-	flist.write(str(fa) + "\n")
-
-# Grab followers of followers to build a list of potential suspects.
-for i in followerArray:
-	print("Retrieving " + str(i) + "\'s followers")
-	try:
-		followerDictObj = getFollowersbyID(i)
-		suspectsArray = followerDictObj['ids']
-		for sa in suspectsArray:
-			slist.write(str(sa) + "\n")
-	except: # private accounts. This may still have potential
-		slist.write(str(i) + " may be a protected account. \n")
-		pass
-	time.sleep(30) # should avoid rate limit
-
-
-flist.close()
-slist.close()
 
 '''
 if __name__ == "__main__":
