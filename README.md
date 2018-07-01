@@ -15,10 +15,11 @@ Taking in username argument seems to work, but there is no output with user ID a
 ###### 06/30/2018
 Resolved menu selection issue.
 Moved code into proper place depending on flag selectiom.
-Resolved Twitter ID option issue, but it broke again when moving code.
+Resolved Twitter ID option issue, ~~but it broke again when moving code.~~
+
 
 _TO-DO_
 1. ~~Build menu into program.~~
 2. Report default settings of suspect accounts.
 3. Resolve Twitter IDs to usernames for human readability.
-4. Fix User ID query.... was fixed and broke again. Will review.
+4. ~~Fix User ID query.... was fixed and broke again. Will review.~~

@@ -119,7 +119,7 @@ def start(argv):
 			flist.write(str(fa) + "\n")
 		# Build suspect list
 		for i in followerArray:
-			print("Retrieving " + stri(i) + "\'s followers")
+			print("Retrieving " + str(i) + "\'s followers")
 			try:
 				followerDictObj = getFollowersbyID(i)
 				suspectArray = followerDictObj['ids']
