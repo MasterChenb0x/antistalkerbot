@@ -79,8 +79,8 @@ def start(argv):
 		pass
 	twitName = ""
 	twitID = ""
-	flist = open("followerlist.txt","r+")
-	slist = open("suspects.txt","r+")
+	flist = open("followerlist.txt","w+") # "w+" opens a file, OR creates one if it doens't already exist.
+	slist = open("suspects.txt","w+")
 	followerArray = []
 	suspectsArray = []
 	for opt, arg in opts:
@@ -108,7 +108,7 @@ def start(argv):
 			except:
 				slist.write(str(i) + " may be a protected account. \n")
 				pass
-			time.sleep(20) # should avoid rate limit
+			time.sleep(60) # should avoid rate limit
 	if twitID != "":
 		result = getUserInfobyID(twitID)
 		print result
@@ -128,7 +128,7 @@ def start(argv):
 			except:
 				slist.write(str(i) + " may be a protected account. \n")
 				pass
-			time.sleep(20)  # should avoid rate limit 
+			time.sleep(60)  # should avoid rate limit 
 
 	flist.close()
 	slist.close()
