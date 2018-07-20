@@ -18,10 +18,13 @@ Moved code into proper place depending on flag selectiom.
 Resolved Twitter ID option issue, ~~but it broke again when moving code.~~
 
 ###### 07/09/2018
-Program was being rate limited, So I changed time to sleep from 20 to 60. Increases time of scrape, but no longer gets blocked. Rate Limit chart from Twitter found ehre:
+Program was being rate limited, So I changed time to sleep from 20 to 60. Increases time of scrape, but no longer gets blocked. Rate Limit chart from Twitter found here:
 https://developer.twitter.com/en/docs/basics/rate-limits.html .
 Rate Limit depends on the nature/type of request.
 Also handled file operations whether the file originally exists or not..
+
+###### 07/19/2018
+Removing getopt seemed to condense code a bit. Not sure if I may need it if I introduce more flags/options. For the time being, I switched to using argv checking instead of getopt. The script with getopt is now "antistalker.back" just in case I decide to switch back to that method or introduce new flags/options.
 
 
 _TO-DO_

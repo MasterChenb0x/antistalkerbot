@@ -4,8 +4,8 @@ import os
 import re
 import random
 import time
+import getopt
 from datetime import datetime
-#from twitfunctions import *
 from twython import Twython
 
 
@@ -13,11 +13,10 @@ from twython import Twython
 apiKey = 'YOUR_API_KEY'
 apiSecret = 'YOUR_API_SECRET'
 accessToken = 'YOUR_ACCESS_TOKEN'
-accessTokenSecret = 'YOUR_ACCESS_TOKEN_SECRET'
+accessTokenSecret = 'ACCESS_TOKEN_SECRET'
 
 api = Twython(apiKey,apiSecret,accessToken,accessTokenSecret)
 #--
-
 
 #-- Functions
 def usage():
@@ -68,36 +67,30 @@ def getFriendsbyID(userid):
         return api.get_friends_ids(user_id=userid)
 
 def start(argv):
+	if len(sys.argv) < 1:
+		usage()
+		sys.exit()
+	try:
+		opts, args = getopt.getopt(argv, "u:i:")
+	except getopt.GetoptError:
+		usage()
+		sys.exit()
+	except Exception, e:
+		pass
 	twitName = ""
 	twitID = ""
-	flist = open("followerlist.txt","w+")
+	flist = open("followerlist.txt","w+") # "w+" opens a file, OR creates one if it doens't already exist.
 	slist = open("suspects.txt","w+")
 	followerArray = []
 	suspectsArray = []
-	if len(sys.argv) < 1:
-		usage()
-	if sys.argv[1].isdigit() == True:
-		twitID = str(sys.argv[1])
-		result = getUserInfobyID(twitID)
-                followers = getFollowersbyID(twitID)
-                followerArray = followers['ids']
-                # Write followers to file for later analysis
-                for fa in followerArray:
-                        flist.write(str(fa) + "\n")
-                # Build suspect list
-                for i in followerArray:
-                        print("Retrieving " + str(i) + "\'s followers")
-                        try:
-                                followerDictObj = getFollowersbyID(i)
-                                suspectArray = followerDictObj['ids']
-                                for sa in suspectArray:
-                                        slist.write(str(sa) + "\n")
-                        except:
-                                slist.write(str(i) + " may be a protected account. \n")
-                                pass
-                        time.sleep(60)  # should avoid rate limit
-	else:
-		twitName = str(sys.argv[1])
+	for opt, arg in opts:
+		if opt == '-u':
+			twitName = str(arg)
+			print(twitName)
+		elif opt == '-i':
+			twitID = str(arg)			
+			print(twitID)
+	if twitName != "":
 		result = getUserInfobyName(twitName)
 		followers = getFollowersbyName(twitName)
 		followerArray = followers['ids']
@@ -114,8 +107,28 @@ def start(argv):
 					slist.write(str(sa) + "\n")
 			except:
 				slist.write(str(i) + " may be a protected account. \n")
-				#pass
-			time.sleep(60) # should avoid rate limit. 
+				pass
+			time.sleep(60) # should avoid rate limit
+	if twitID != "":
+		result = getUserInfobyID(twitID)
+		print result
+		followers = getFollowersbyID(twitID)
+		followerArray = followers['ids']
+		# Write followers to file for later analysis
+		for fa in followerArray:
+			flist.write(str(fa) + "\n")
+		# Build suspect list
+		for i in followerArray:
+			print("Retrieving " + str(i) + "\'s followers")
+			try:
+				followerDictObj = getFollowersbyID(i)
+				suspectArray = followerDictObj['ids']
+				for sa in suspectArray:
+					slist.write(str(sa) + "\n")
+			except:
+				slist.write(str(i) + " may be a protected account. \n")
+				pass
+			time.sleep(60)  # should avoid rate limit 
 
 	flist.close()
 	slist.close()
@@ -135,5 +148,5 @@ if __name__ == "__main__":
 	except KeyboardInterrupt:
 		print("Program stopped by user.")
 	except:
-		usage()	
+		sys.exit()	
 
