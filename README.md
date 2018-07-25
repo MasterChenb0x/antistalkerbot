@@ -26,6 +26,8 @@ Also handled file operations whether the file originally exists or not..
 ###### 07/19/2018
 Removing getopt seemed to condense code a bit. Not sure if I may need it if I introduce more flags/options. For the time being, I switched to using argv checking instead of getopt. The script with getopt is now "antistalker.back" just in case I decide to switch back to that method or introduce new flags/options.
 
+###### 07/24/2018
+To easily sort and tally the suspects list, run `sort suspects.txt | uniq -c | sort > sortedsuspects.txt`
 
 _TO-DO_
 1. ~~Build menu into program.~~
