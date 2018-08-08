@@ -24,9 +24,9 @@ def usage():
 	"""
 	Displays options and examples upon running with bad or missing params
 	"""
-	print("Usage: ./antiStalker.py options \n")
-	print("		-u : Twitter handle of Stalker's Target...probably your own handle \n")
-	print("		-i : Same as -u but with ID instead of handle \n")
+	print("Usage: ./antiStalker.py TwitterID|TwitterUsername \n")
+	print("		TwitterID or TwitterUsername will usually be your own if you are monitoring your own acccount for stalker activity. \n")
+	print("		 \n")
 	sys.exit()
 
 def getUserInfobyID(userid):

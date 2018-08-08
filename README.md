@@ -29,6 +29,10 @@ Removing getopt seemed to condense code a bit. Not sure if I may need it if I in
 ###### 07/24/2018
 To easily sort and tally the suspects list, run `sort suspects.txt | uniq -c | sort > sortedsuspects.txt`
 
+###### 08/07/2018
+Thanks to BGM for code review before presentation. Updated "usage" message since I switched from getopts to argv for input. Other things will be fixed later today...maybe.
+
+
 _TO-DO_
 1. ~~Build menu into program.~~
 2. Report default settings of suspect accounts.
