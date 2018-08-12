@@ -5,10 +5,14 @@ import re
 import random
 import time
 from datetime import datetime
-#from twitfunctions import *
+from twitfunctions import *
 from twython import Twython
 
-
+#--
+# AntiStalkerBot by MasterChen, @chenb0x 2018.
+# Donations are welcome via Paypal, chenb0xllc@gmailcom
+#--
+'''
 #-- Twitter instance setup
 apiKey = 'YOUR_API_KEY'
 apiSecret = 'YOUR_API_SECRET'
@@ -66,6 +70,7 @@ def getFriendsbyID(userid):
         return a list of "friends"; people the username follows as a dictionary object.
         """
         return api.get_friends_ids(user_id=userid)
+'''
 
 def start(argv):
 	twitName = ""
