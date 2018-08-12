@@ -2,6 +2,11 @@
 
 Antidote to my 2015 DC Skytalk "Automate Your Stalking".
 
+#### Usage:
+`./antistalker.py TwitterID|TwitterUserName`
+
+example: ./antistalker.py chenb0x
+
 ##### CHANGELOG
 
 ###### 06/25/2018 
@@ -32,6 +37,8 @@ To easily sort and tally the suspects list, run `sort suspects.txt | uniq -c | s
 ###### 08/07/2018
 Thanks to BGM for code review before presentation. Updated "usage" message since I switched from getopts to argv for input. Other things will be fixed later today...maybe.
 
+###### 08/11/2018
+Finally separated Twitter specific functions into "twitfunctions.py". To setup this program to work with your account, update the API key informations in twitfunctions.py.
 
 _TO-DO_
 1. ~~Build menu into program.~~

@@ -10,18 +10,8 @@ from twython import Twython
 
 #--
 # AntiStalkerBot by MasterChen, @chenb0x 2018.
-# Donations are welcome via Paypal, chenb0xllc@gmailcom
+# Donations are welcome via Paypal, chenb0xllc[at]gmail.com
 #--
-'''
-#-- Twitter instance setup
-apiKey = 'YOUR_API_KEY'
-apiSecret = 'YOUR_API_SECRET'
-accessToken = 'YOUR_ACCESS_TOKEN'
-accessTokenSecret = 'YOUR_ACCESS_TOKEN_SECRET'
-
-api = Twython(apiKey,apiSecret,accessToken,accessTokenSecret)
-#--
-
 
 #-- Functions
 def usage():
@@ -32,45 +22,6 @@ def usage():
 	print("		TwitterID or TwitterUsername will usually be your own if you are monitoring your own acccount for stalker activity. \n")
 	print("		 \n")
 	sys.exit()
-
-def getUserInfobyID(userid):
-	""" 
-	Returns info on user passed to the function as a dictionary object. 
-	"""
-	# Difference between lookup_user and show_user is list vs dictionary. Not sure on benefits of either yet.
-	return api.show_user(user_id=userid)
-
-def getUserInfobyName(username):
-	"""
-        Returns info on user passed to the function as a dictionary object.
-        """
-        # Difference between lookup_user and show_user is list vs dictionary. Not sure on benefits of either yet.
-        return api.show_user(screen_name=username)
-
-def getFollowersbyName(username):
-	"""
-	return a list of followers of the username passed as an argument as a dictionary object.
-	"""
-	return api.get_followers_ids(screen_name=username)
-
-def getFollowersbyID(userid):
-        """
-        return a list of followers of the username passed as an argument as a dictionary object.
-        """
-        return api.get_followers_ids(user_id=userid)
-
-def getFriendsbyName(username):
-	"""
-	return a list of "friends"; people the username follows as a dictionary object.
-	"""
-	return api.get_friends_ids(screen_name=username)
-
-def getFriendsbyID(userid):
-        """
-        return a list of "friends"; people the username follows as a dictionary object.
-        """
-        return api.get_friends_ids(user_id=userid)
-'''
 
 def start(argv):
 	twitName = ""
@@ -128,12 +79,6 @@ def start(argv):
 
 #--
 
-'''
-#-- Still using the below area for testing until I can put it all together.
-
-
-
-'''
 if __name__ == "__main__":
 	try:
 		start(sys.argv[1:])
